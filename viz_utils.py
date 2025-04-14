@@ -29,12 +29,16 @@ def visualize_prediction(input_data_cur_date: np.ndarray,
     # Plot SSH with ground truth overlay
     im1 = ax1.imshow(input_data_cur_date, cmap=cmocean.cm.balance, origin='lower')
     ax1.set_title('SSH with Ground Truth') 
-    ax1.imshow(target > 0.5, cmap='Greens', alpha=0.5, origin='lower')
+    # Create mask for ground truth
+    mask = target > 0.5
+    ax1.imshow(np.ma.masked_where(~mask, target), cmap='Greys', alpha=0.7, origin='lower')
     
     # Plot SSH with prediction overlay
     im2 = ax2.imshow(input_data_cur_date, cmap=cmocean.cm.balance, origin='lower')
     ax2.set_title('SSH with Model Prediction')
-    ax2.imshow(prediction > 0.5, cmap='Reds', alpha=0.5, origin='lower')
+    # Create mask for prediction
+    mask = prediction > 0.5
+    ax2.imshow(np.ma.masked_where(~mask, prediction), cmap='Greys', alpha=0.7, origin='lower')
     
     plt.tight_layout()
     plt.savefig(output_file)
