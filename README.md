@@ -33,7 +33,6 @@ Lagrangian coherent eddies play a crucial role in ocean dynamics by transporting
 
 This research investigates eddy coherence at three different durations: 5, 10, and 20 days.
 
-
 ## Repository Contents
 
 ```
@@ -59,27 +58,6 @@ This research investigates eddy coherence at three different durations: 5, 10, a
 - `viz_utils.py`: Functions for visualizing inputs and predictions
 - `models/Models2D.py`: Implementation of the U-Net architecture used for eddy detection
 
-## Citation
-
-[To be completed with paper citation information]
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-- **Luna Hiron**  
-  Assistant Scientist  
-  Center for Ocean-Atmospheric Prediction Studies  
-  Florida State University  
-  [Personal Website](https://lunahiron.github.io/)
-
-- **Olmo Zavala Romero**  
-  Assistant Professor  
-  Department of Scientific Computing  
-  Florida State University  
-  [Faculty Profile](https://www.sc.fsu.edu/people?uid=osz09)
 
 # Eddy Detection Model Testing
 
@@ -167,3 +145,27 @@ where:
 - `input_type`: Either 'ssh_sst_chlora' or 'only_ssh'
 - `XX`: Number of days before (always 2)
 - `YY`: Length of coherent structure (5, 10, or 20)
+
+## Citation
+
+If you use this code in your research, please cite:
+
+Hiron, L., Zavala-Romero, O., Chassignet, E. P., Miron, P., & Subrahmanyam, B. (2024). *Identifying and predicting the Lagrangian coherence of eddies in the Gulf of Mexico using machine learning and satellite observations*. Journal of Geophysical Research: Machine Learning and Computation. [Under Review]
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+- **Luna Hiron**  
+  Assistant Scientist  
+  Center for Ocean-Atmospheric Prediction Studies  
+  Florida State University  
+  [Personal Website](https://lunahiron.github.io/)
+
+- **Olmo Zavala Romero**  
+  Assistant Professor  
+  Department of Scientific Computing  
+  Florida State University  
+  [Faculty Profile](https://www.sc.fsu.edu/people?uid=osz09)
