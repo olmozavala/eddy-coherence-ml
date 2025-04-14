@@ -69,8 +69,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-### Authors
-
 - **Luna Hiron**  
   Assistant Scientist  
   Center for Ocean-Atmospheric Prediction Studies  
