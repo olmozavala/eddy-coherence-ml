@@ -1,4 +1,4 @@
-# Eddy Coherence ML
+# Identifying and predicting the Lagrangian coherence of eddies in the Gulf of Mexico using machine learning and satellite observations
 
 Machine learning framework for identifying and predicting Lagrangian coherent eddies in the Gulf of Mexico using satellite observations. This repository provides access to trained models described in our paper that predict Loop Current Eddies (LCEs) and Loop Current Frontal Eddies (LCFEs).
 
