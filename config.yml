@@ -1,0 +1,6 @@
+# Model configuration
+model:
+  inputs: 'ssh_sst_chlora'  # Options: 'ssh_sst_chlora' or 'only_ssh'
+  days_before: 2 # Number of days before the test day (must be 2)
+  lcv_length: 5  # Can be (5,10,20) It is used also as days after
+  test_id: 0  # ID of the example to test (0-9) 
