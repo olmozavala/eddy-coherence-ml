@@ -72,7 +72,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ### Authors
 
 - **Luna Hiron**  
-  Physical Oceanographer  
+  Assistant Scientist  
+  Center for Ocean-Atmospheric Prediction Studies  
+  Florida State University  
   [Personal Website](https://lunahiron.github.io/)
 
 - **Olmo Zavala Romero**  
@@ -102,11 +104,7 @@ This repository contains code for testing trained U-Net models that detect ocean
 
 ## Input Data Format
 
-The input data is pre-processed and normalized:
-
-- SSH (Sea Surface Height): Normalized using submean approach (local mean removed)
-- SST (Sea Surface Temperature): Normalized to range [-1, 1]
-- Chlorophyll-a: Log-transformed and normalized to range [-1, 1]
+The input data is pre-processed and normalized as explained in the paper.
 
 The data is provided in pickle files with the following structure:
 ```python
@@ -156,11 +154,11 @@ The script will:
 ### Example Outputs
 
 #### Input Data Visualization
-![Example Inputs](examples/ex_inputs.png)
+![Example Inputs](imgs/ex_inputs.png)
 *Input data visualization showing SSH, SST, and Chlorophyll-a across the temporal window*
 
 #### Prediction Results
-![Example Prediction](examples/ex_pred.png)
+![Example Prediction](imgs/ex_pred.png)
 *Left: SSH with ground truth eddy overlay (green). Right: SSH with model prediction overlay (red)*
 
 The output files are saved with descriptive names including the configuration parameters:
