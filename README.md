@@ -105,10 +105,10 @@ where days_total = days_before + days_after + 1
 
 ## Installation
 
-1. Clone the repository:
+1. Clone the repository (requires `git-lfs`):
 ```bash
-git clone https://github.com/your-username/lagrangian-eddy-detection.git
-cd lagrangian-eddy-detection
+git clone git@github.com:olmozavala/eddy-coherence-ml.git
+cd eddy-coherence-ml/
 ```
 
 2. Create and activate a virtual environment using [uv](https://docs.astral.sh/uv/getting-started/installation/):
@@ -148,7 +148,7 @@ The script will:
 1. Load the model configuration from `config.yml`
 2. Load and visualize the input data
 3. Load the trained model and make predictions
-4. Save visualizations in the `outputs` folder:
+4. Save visualizations in the `outputs/` folder:
 
 ### Example Outputs
 
