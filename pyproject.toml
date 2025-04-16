@@ -1,0 +1,12 @@
+[project]
+name = "eddy-coherence-ml"
+version = "0.1.0"
+description = "Identifying and predicting the Lagrangian coherence of eddies in the Gulf of Mexico using machine learning and satellite observations"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "cmocean>=4.0.3",
+    "matplotlib>=3.10.1",
+    "pyyaml>=6.0.2",
+    "torch>=2.6.0",
+]
