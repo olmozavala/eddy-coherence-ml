@@ -103,6 +103,28 @@ For 'ssh_sst_chlora' inputs, the channels are organized as:
 
 where days_total = days_before + days_after + 1
 
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/your-username/lagrangian-eddy-detection.git
+cd lagrangian-eddy-detection
+```
+
+2. Create and activate a virtual environment using uv:
+```bash
+uv venv
+source .venv/bin/activate  # On Unix/macOS
+.venv\Scripts\activate     # On Windows
+```
+
+3. Install dependencies:
+```bash
+uv pip install -r requirements.txt
+```
+
+Note: If you encounter any GPU-related issues with PyTorch, you may need to install the appropriate CUDA version. Visit [PyTorch's installation page](https://pytorch.org/get-started/locally/) for specific installation commands.
+
 ## Usage
 
 1. Configure the model parameters in `config.yml`:
@@ -114,9 +136,15 @@ where days_total = days_before + days_after + 1
      test_id: 0               # Example ID to test (0-9)
    ```
 
-2. Ensure model weights are in the correct directory structure:
+2. Ensure model weights are in the correct directory structure
 
-3. Run the testing script:
+3. Activate the virtual environment if not already active:
+   ```bash
+   source .venv/bin/activate  # On Unix/macOS
+   .venv\Scripts\activate     # On Windows
+   ```
+
+4. Run the testing script:
    ```bash
    python test_models.py
    ```

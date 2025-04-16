@@ -36,7 +36,8 @@ def load_model(model_path: str, input_type: str = 'ssh_sst_chlora',
     model = UNet(num_levels=4, cnn_per_level=2, input_channels=count_channels,
                  output_channels=1, start_filters=32, kernel_size=3).to(device)
     
-    model.load_state_dict(torch.load(model_path))
+    # Add map_location to handle device mapping
+    model.load_state_dict(torch.load(model_path, map_location=device))
     model.eval()
     print(f"Model loaded from {model_path} successfully")
     return model
@@ -113,7 +114,7 @@ def main():
     )
     
     # Visualize inputs
-    output_file = join("outputs", f"inputs_{inputs}_DaysBefore_{days_before:02d}_DaysAfter_{lcv_length:02d}_DaysCoherent_{lcv_length:02d}.png")
+    output_file = join(config['output_folder'], f"inputs_{inputs}_DaysBefore_{days_before:02d}_DaysAfter_{lcv_length:02d}_DaysCoherent_{lcv_length:02d}.png")
     visualize_inputs(input_data, inputs, days_before, lcv_length, output_file)
     
     # Verify weights exist
@@ -134,7 +135,7 @@ def main():
     target = target.squeeze()
     
     # Visualize results
-    output_file = join("outputs", f"prediction_{inputs}_DaysBefore_{days_before:02d}_DaysAfter_{lcv_length:02d}_DaysCoherent_{lcv_length:02d}.png")
+    output_file = join(config['output_folder'], f"prediction_{inputs}_DaysBefore_{days_before:02d}_DaysAfter_{lcv_length:02d}_DaysCoherent_{lcv_length:02d}.png")
     visualize_prediction(input_data_cur_date[days_before], prediction, target, output_file)
 
 if __name__ == "__main__":

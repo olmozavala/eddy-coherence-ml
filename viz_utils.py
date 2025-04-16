@@ -7,9 +7,9 @@ import matplotlib.pyplot as plt
 import cmocean
 import numpy as np
 from matplotlib.colors import LogNorm
-from os.path import join
 from typing import List, Dict, Any
-
+from os.path import join
+import os
 def visualize_prediction(input_data_cur_date: np.ndarray, 
                         prediction: np.ndarray, 
                         target: np.ndarray,
@@ -41,6 +41,9 @@ def visualize_prediction(input_data_cur_date: np.ndarray,
     ax2.imshow(np.ma.masked_where(~mask, prediction), cmap='Greys', alpha=0.7, origin='lower')
     
     plt.tight_layout()
+    # Verify the output folder exists
+    if not os.path.exists(os.path.dirname(output_file)):
+        os.makedirs(os.path.dirname(output_file))
     plt.savefig(output_file)
     plt.show()
 
@@ -88,5 +91,9 @@ def visualize_inputs(data: List[Dict[str, Any]],
     # Main title
     plt.suptitle(f"Inputs for {inputs_str} with {days_before} days before and {lcv_length} days after", fontsize=16)
     plt.tight_layout()
+    # Verify the output folder exists
+    if not os.path.exists(os.path.dirname(output_file)):
+        os.makedirs(os.path.dirname(output_file))
+
     plt.savefig(output_file)
     plt.show()
