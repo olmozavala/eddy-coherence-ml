@@ -105,16 +105,19 @@ where days_total = days_before + days_after + 1
 
 ## Installation
 
-1. Clone the repository (requires `git-lfs`):
+1. Install `git-lfs`, more details at [Git Large File Storage](https://git-lfs.com/).
+
+2. Clone the repository:
 ```bash
 git clone git@github.com:olmozavala/eddy-coherence-ml.git
 cd eddy-coherence-ml/
 ```
 
-2. Create and activate a virtual environment using [uv](https://docs.astral.sh/uv/getting-started/installation/):
+3. Create the virtual environment using [uv](https://docs.astral.sh/uv/getting-started/installation/):
 ```bash
 uv sync
 ```
+
 ## Usage
 
 1. Configure the model parameters in `config.yml`:
@@ -126,7 +129,7 @@ uv sync
      test_id: 0               # Example ID to test (0-9)
    ```
 
-2. Ensure model weights are in the correct directory structure
+2. Ensure the input data and the model weights are in the correct directory structures (e.g. `model_weights/` and `input_data/` for the examples).
 
 3. Activate the virtual environment if not already active:
    ```bash
@@ -138,17 +141,17 @@ uv sync
    ```bash
    python test_models.py
    ```
-   or simply use:
+   Or use:
    ```bash
    uv run python test_models.py
    ```
-   to let `uv` activate the environment.
+   to run with `uv`, which automatically activates the environment.
 
 The script will:
-1. Load the model configuration from `config.yml`
-2. Load and visualize the input data
-3. Load the trained model and make predictions
-4. Save visualizations in the `outputs/` folder:
+- Load the model configuration from `config.yml`
+- Load and visualize the input data
+- Load the trained model and make predictions
+- Save visualizations in the `outputs/` folder.
 
 ### Example Outputs
 
@@ -165,9 +168,9 @@ The output files are saved with descriptive names including the configuration pa
 - `prediction_{input_type}_DaysBefore_{XX}_DaysAfter_{YY}_DaysCoherent_{YY}.png`
 
 where:
-- `input_type`: Either 'ssh_sst_chlora' or 'only_ssh'
-- `XX`: Number of days before (always 2)
-- `YY`: Length of coherent structure (5, 10, or 20)
+- `input_type`: Either 'ssh_sst_chlora' or 'only_ssh'.
+- `XX`: Number of days before (always 2).
+- `YY`: Length of coherent structure (5, 10, or 20).
 
 ## Citation
 
