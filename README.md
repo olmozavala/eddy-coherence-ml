@@ -111,20 +111,10 @@ git clone https://github.com/your-username/lagrangian-eddy-detection.git
 cd lagrangian-eddy-detection
 ```
 
-2. Create and activate a virtual environment using uv:
+2. Create and activate a virtual environment using [uv](https://docs.astral.sh/uv/getting-started/installation/):
 ```bash
-uv venv
-source .venv/bin/activate  # On Unix/macOS
-.venv\Scripts\activate     # On Windows
+uv sync
 ```
-
-3. Install dependencies:
-```bash
-uv pip install -r requirements.txt
-```
-
-Note: If you encounter any GPU-related issues with PyTorch, you may need to install the appropriate CUDA version. Visit [PyTorch's installation page](https://pytorch.org/get-started/locally/) for specific installation commands.
-
 ## Usage
 
 1. Configure the model parameters in `config.yml`:
@@ -148,6 +138,11 @@ Note: If you encounter any GPU-related issues with PyTorch, you may need to inst
    ```bash
    python test_models.py
    ```
+   or simply use:
+   ```bash
+   uv run python test_models.py
+   ```
+   to let `uv` activate the environment.
 
 The script will:
 1. Load the model configuration from `config.yml`
