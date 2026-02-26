@@ -18,7 +18,9 @@ jobs:
       - name: Install the project
         run: uv sync --frozen
       - name: Run Script
-        run: uv run docs/update_web.py
+        run: |
+          cd docs
+          uv run update_web.py
         env:
           COPERNICUS_USER: ${{ secrets.COPERNICUS_USER }}
           COPERNICUS_PASS: ${{ secrets.COPERNICUS_PASS }}

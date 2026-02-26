@@ -36,7 +36,7 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 from scipy.ndimage import gaussian_filter1d, map_coordinates
 from skimage import measure
 
-sys.path.append("./")  # use function from the test_modes.py file
+sys.path.append("../")  # use function from the test_modes.py file
 from test_models import get_best_device, load_model, test_model
 
 device = get_best_device()
