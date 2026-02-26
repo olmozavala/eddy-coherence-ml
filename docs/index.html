@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gulf of Mexico - Identification of Coherent Eddies</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Lora:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+      padding-left: 5rem;
+      padding-right: 5rem;
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+      /* Removed text-align: center from container */
+      box-sizing: border-box;
+    }
+
+    img {
+      max-width: 90%;
+      height: auto;
+      display: block; /* Make image a block element for centering */
+      margin: 1rem auto; /* Center the image and add space */
+    }
+
+    h1 {
+      font-family: 'Lora', serif;
+      text-align: left;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #222;
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: #666;
+      margin-top: 1rem;
+      text-align: left;
+      line-height: 1.5; /* Improve readability */
+    }
+
+    .navigation {
+      margin-top: 0rem;
+      margin-bottom: 0rem;
+      text-align: center;
+    }
+
+    .navigation button {
+      padding: 0.5rem 1rem;
+      margin: 0 0.5rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #eee;
+      color: #333;
+      transition: background-color 0.2s ease;
+    }
+
+    .navigation button:hover {
+      background-color: #ddd;
+    }
+
+    .navigation button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .footer {
+      font-size: 0.75rem;
+      margin-top: 1.5rem; /* Added space above footer */
+      color: #aaa;
+      text-align: center; /* Center the footer text */
+    }
+
+    a {
+      color: #666;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Identifying and predicting the Lagrangian coherence of eddies in the Gulf of Mexico using machine learning and satellite observations (<a href="" target="_blank">DOI</a>)</h1>
+    <p>
+      Eddy identification is performed using recent SSH data from the Copernicus Marine Service. The UNET model identifies eddies with a 10 day-long coherence (dashed black lines) for the date indicated in the figure title, utilizing SSH data from the two preceding days through the five subsequent days.
+    </p>
+
+    <img id="gom-image" alt="Gulf of Mexico SSH">
+    <div class="navigation">
+      <button id="prev-day"><<<</button>
+      <button id="next-day">>>></button>
+    </div>
+    <div class="footer">
+    <a href="" target="_blank">Hiron, Zavala Romero, et al., 2025</a> • <a href="https://data.marine.copernicus.eu/product/SEALEVEL_GLO_PHY_L4_NRT_008_046/description" target="_blank">Copernicus Marine Data</a> • <a href="https://github.com/olmozavala/eddy-coherence-ml" target="_blank">GitHub</a>
+    </div>
+  </div>
+
+  <script>
+    const gomImage = document.getElementById("gom-image");
+    const prevButton = document.getElementById("prev-day");
+    const nextButton = document.getElementById("next-day");
+
+    // Calculate the date that is 5 days ago (the latest date in our navigation range)
+    let latestNavDate = new Date();
+    latestNavDate.setDate(latestNavDate.getDate() - 5);
+    latestNavDate.setHours(0, 0, 0, 0); // Set time to midnight for consistent comparison
+
+    // Calculate the earliest date in the range (7 days backward from 5 days ago = 11 days ago total)
+    let earliestNavDate = new Date(latestNavDate); // Start from latestNavDate
+    earliestNavDate.setDate(latestNavDate.getDate() - 6); // Subtract 6 more days to get 7 days total
+    earliestNavDate.setHours(0, 0, 0, 0); // Set time to midnight
+
+    // Initialize the current date to the latest date in the navigation range (5 days ago)
+    let currentDate = new Date(latestNavDate);
+
+    // Function to format date as-MM-DD
+    function formatDate(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    // Function to update the image source and button states
+    function updateImage() {
+      const cachebuster = Date.now(); // Unique timestamp to prevent caching
+      const dateString = formatDate(currentDate);
+      imageSrc = `figs/${dateString}.png?cachebuster=${cachebuster}`;
+      gomImage.src = imageSrc;
+      console.log("Loading image:", imageSrc);
+
+      // Enable/disable buttons based on the current date relative to the range limits
+      prevButton.disabled = currentDate.getTime() <= earliestNavDate.getTime();
+      nextButton.disabled = currentDate.getTime() >= latestNavDate.getTime();
+    }
+
+    // Event listeners for buttons
+    prevButton.addEventListener("click", () => {
+      // Move the current date back by one day
+      currentDate.setDate(currentDate.getDate() - 1);
+      updateImage();
+    });
+
+    nextButton.addEventListener("click", () => {
+      // Move the current date forward by one day
+      currentDate.setDate(currentDate.getDate() + 1);
+      updateImage();
+    });
+
+    // --- Add keyboard event listener ---
+    document.addEventListener('keydown', function(event) {
+      if (event.target.tagName !== 'INPUT' && event.target.tagName !== 'TEXTAREA') {
+        if (event.key === 'ArrowLeft') {
+          prevButton.click();
+          event.preventDefault();
+        } else if (event.key === 'ArrowRight') {
+          nextButton.click();
+          event.preventDefault();
+        }
+      }
+    });
+
+    // Initial call to display the image for the latest date in the range (5 days ago)
+    updateImage();
+
+  </script>
+</body>
+</html>

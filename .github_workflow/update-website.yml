@@ -1,0 +1,32 @@
+name: gom update
+
+on:
+  schedule:
+    - cron: '0 20 * * *'  # Every day
+  workflow_dispatch:      # Allows manual triggering
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: Copernicus
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+      - name: Install the project
+        run: uv sync --frozen
+      - name: Run Script
+        run: uv run docs/update_web.py
+        env:
+          COPERNICUS_USER: ${{ secrets.COPERNICUS_USER }}
+          COPERNICUS_PASS: ${{ secrets.COPERNICUS_PASS }}
+      - name: Commit and push changes
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add docs/data/*.nc
+          git add docs/figs/*.png
+          git commit -m "Update data for $(date '+%Y-%m-%d')" || echo "No changes to commit"
+          git push
